@@ -31,6 +31,8 @@ public class ClientesProvider : IClientesProvider
 
     public GenericResponse AddCliente(ClienteCrearModel clienteCrearModel, string uuid)
     {
+        var cliente = _clienteRepository.GetClienteIdentificacion(clienteCrearModel.NumeroIdentificacion);
+        if (cliente != null) return new GenericResponse() { Success = false, ErrorMessage = "Cliente ya existe" };
         var clienteInsertar = new Cliente()
         {
             Activo = true,
