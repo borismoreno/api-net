@@ -26,6 +26,12 @@ public class ClienteRepository : IClienteRepository
         return await dbCollection.Find(filter).FirstOrDefaultAsync();
     }
 
+    public async Task<Cliente> GetClienteIdentificacion(string numeroIdentificacion)
+    {
+        FilterDefinition<Cliente> filter = filterDefinitionBuilder.Eq(cliente => cliente.NumeroIdentificacion, numeroIdentificacion);
+        return await dbCollection.Find(filter).FirstOrDefaultAsync();
+    }
+
     public GenericResponse AddCliente(Cliente cliente)
     {
         dbCollection.InsertOne(cliente);
