@@ -52,12 +52,13 @@ public class ClientesController : ControllerBase
 
     [Authorize]
     [HttpPost]
-    public ActionResult<GenericResponse> AddCliente(ClienteCrearModel clienteCrearModel)
+    public async Task<ActionResult<GenericResponse>> AddCliente(ClienteCrearModel clienteCrearModel)
     {
         try
         {
             var uid = ((ClaimsIdentity)User.Identity).FindFirst("uid").Value;
-            return _clientesProvider.AddCliente(clienteCrearModel, uid);
+            var res = await _clientesProvider.AddCliente(clienteCrearModel, uid);
+            return Ok(res);
         }
         catch (System.Exception)
         {

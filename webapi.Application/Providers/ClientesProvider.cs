@@ -29,9 +29,9 @@ public class ClientesProvider : IClientesProvider
         return await _clienteRepository.GetCliente(new Guid(clienteId));
     }
 
-    public GenericResponse AddCliente(ClienteCrearModel clienteCrearModel, string uuid)
+    public async Task<GenericResponse> AddCliente(ClienteCrearModel clienteCrearModel, string uuid)
     {
-        var cliente = _clienteRepository.GetClienteIdentificacion(clienteCrearModel.NumeroIdentificacion);
+        var cliente = await _clienteRepository.GetClienteIdentificacion(clienteCrearModel.NumeroIdentificacion);
         if (cliente != null) return new GenericResponse() { Success = false, ErrorMessage = "Cliente ya existe" };
         var clienteInsertar = new Cliente()
         {
