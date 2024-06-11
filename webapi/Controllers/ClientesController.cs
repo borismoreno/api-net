@@ -81,4 +81,19 @@ public class ClientesController : ControllerBase
             throw;
         }
     }
+
+    [AllowAnonymous]
+    [HttpPut]
+    public async Task<ActionResult<GenericResponse>> UpdateCliente(string clienteId, ClienteCrearModel clienteCrearModel)
+    {
+        try
+        {
+            return await _clientesProvider.UpdateCliente(clienteId, clienteCrearModel);
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+    }
 }

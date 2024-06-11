@@ -55,4 +55,20 @@ public class ClientesProvider : IClientesProvider
 
         return new() { Success = true };
     }
+
+    public async Task<GenericResponse> UpdateCliente(string clienteId, ClienteCrearModel clienteCrearModel)
+    {
+        var cliente = await _clienteRepository.GetCliente(new Guid(clienteId));
+        if (cliente == null) return new() { Success = false, ErrorMessage = "Cliente no encontrado" };
+
+        cliente.RazonSocial = clienteCrearModel.RazonSocial;
+        cliente.Direccion = clienteCrearModel.Direccion;
+        cliente.TipoIdentificacion = clienteCrearModel.TipoIdentificacion;
+        cliente.NumeroIdentificacion = clienteCrearModel.NumeroIdentificacion;
+        cliente.Telefono = clienteCrearModel.Telefono;
+        cliente.Mail = clienteCrearModel.Mail;
+
+        return _clienteRepository.UpdateCliente(cliente);
+
+    }
 }

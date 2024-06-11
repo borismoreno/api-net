@@ -38,6 +38,12 @@ public class ClienteRepository : IClienteRepository
         return new GenericResponse { Success = true };
     }
 
+    public GenericResponse UpdateCliente(Cliente cliente)
+    {
+        dbCollection.ReplaceOne(b => b.Id == cliente.Id, cliente);
+        return new GenericResponse { Success = true };
+    }
+
     public GenericResponse DeleteCliente(Guid clienteId)
     {
         FilterDefinition<Cliente> filter = filterDefinitionBuilder.Eq(cliente => cliente.Id, clienteId);
