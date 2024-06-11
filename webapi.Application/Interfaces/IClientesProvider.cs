@@ -8,5 +8,6 @@ public interface IClientesProvider
     Task<List<Cliente>> GetClientes(string usuario);
     Task<Cliente> GetCliente(string clienteId);
     Task<GenericResponse> AddCliente(ClienteCrearModel clienteCrearModel, string uuid);
+    Task<GenericResponse> UpdateCliente(string clienteId, ClienteCrearModel clienteCrearModel);
     Task<GenericResponse> DeleteCliente(string clienteId);
 }
