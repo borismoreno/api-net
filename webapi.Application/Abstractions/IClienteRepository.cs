@@ -9,5 +9,6 @@ public interface IClienteRepository
     Task<Cliente> GetCliente(Guid clienteId);
     Task<Cliente> GetClienteIdentificacion(string numeroIdentificacion);
     GenericResponse AddCliente(Cliente cliente);
+    GenericResponse UpdateCliente(Cliente cliente);
     GenericResponse DeleteCliente(Guid clienteId);
 }
